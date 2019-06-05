@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body style="background-image: url(bg.jpg);">
+	<h1>Очки:<span class="ochki">0</span></h1>
+	<h1>Жуки:<span class="juki">0</span></h1>
+	<h1>Оставшееся время:<span class="time">15000</span></h1>
+<script type="text/javascript">
+	let ochki_ind=document.querySelector(".ochki");
+	let juki_ind=document.querySelector(".juki");
+	let time_ind=document.querySelector(".time");
+	let ochki=0;
+	let juki=0;
+	let time=15000;
+
+	let func = function(arg) {//создание функции
+		let rand = Math.random()*arg //случайное число до 5
+		let round = Math.round(rand) //округлить число 
+		return round;
+	}
+
+	let create= function(){
+		let newImg = document.createElement('img');
+		document.body.appendChild(newImg);
+		newImg.src="img.svg";
+		newImg.style.height="100px";
+		newImg.style.width="100px";
+		newImg.style.position="absolute";
+		newImg.style.marginLeft=func(1000)+"px";
+		newImg.style.marginTop=func(550)+"px";
+		juki=juki+1;
+		juki_ind.innerHTML=juki
+		time=time-1000;
+		time_ind.innerHTML=time
+		newImg.onclick = function(){
+			newImg.style.display="none";
+			ochki=ochki+10;
+			ochki_ind.innerHTML=ochki
+		}
+	}
+
+	let app= function(){
+		let newImg = document.createElement('img');
+		document.body.appendChild(newImg);
+		newImg.src="apple.png";
+		newImg.style.height="67px";
+		newImg.style.width="88px";
+		newImg.style.position="absolute";
+		newImg.style.marginLeft=func(1000)+"px";
+		newImg.style.marginTop=func(550)+"px";
+		newImg.onclick = function(){
+			newImg.style.display="none";
+			time=time+1000;
+			time_ind.innerHTML=time
+		}
+	}
+
+	let kot=setInterval(create,1000);
+	let kott=setInterval(app,3000);
+
+	let proverka = function() {//создание функции
+		if(time<=0 && ochki<150){
+			alert("you lose")
+			clearInterval(kot);
+			clearInterval(kott);
+		}
+	}
+	setTimeout(proverka,time) //таймер
+
+	
+</script>
+</body>
+</html>
